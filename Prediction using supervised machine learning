@@ -1,0 +1,37 @@
+# reading the csv data of student study hours and scores#
+student<-read.csv("https://raw.githubusercontent.com/AdiPersonalWorks/Random/master/student_scores%20-%20student_scores.csv")
+print("reading the student data")
+student
+
+##plotting the distribution of scores##
+plot(x = student$Hours, y = student$Scores,
+     xlab = "Hours studied", ylab = "percentage score",
+     main = "percentage scores vs Hours studied")
+
+##fit a linear regression model using lm function##
+student.reg<-lm(Scores ~ Hours, data = student)
+
+##checking model coefficients##
+student.reg
+
+##put a regression line on plot##
+abline(student.reg, col = "green")
+
+##summary of model##
+print(summary(student.reg))
+
+##showing the coefficents of model##
+coefficients(student.reg)
+##showing the models fitted values##
+fitted(student.reg)
+##showing the extract modell residuals##
+residuals(student.reg)
+
+
+##predicting new values##
+study_hour<-data.frame(Hours = 9.25)
+
+##computing the predicted results##
+prediction_result<-predict(student.reg, study_hour)
+print("the predicted score of a student for 9.25hrs/day is")
+print(prediction_result)
